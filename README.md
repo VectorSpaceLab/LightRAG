@@ -1,6 +1,18 @@
 <h1 align="center">LightRAG</h1>
 
-## 1. Overview
+<div align="center">
+<a href="https://dl.acm.org/doi/abs/10.1145/3701551.3703580" target="_blank"><img src="https://img.shields.io/badge/ACM%20DL-Paper-blue?logo=acm"></a>
+<a href="https://huggingface.co/wcyno23/FlexRAG" target="_blank"><img src=https://img.shields.io/badge/%F0%9F%A4%97%20HuggingFace%20Model-27b3b4.svg></a>
+<a href="https://huggingface.co/datasets/wcyno23/TacZip-Data" target="_blank"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20HuggingFace%20Dataset-ff69b4.svg"></a>
+<a href="https://github.com/"><img alt="License" src="https://img.shields.io/badge/Apache-2.0-green"></a>
+</div>
+<h4 align="center">
+
+## 1. News
+
+* 2026-01-21: We release the code for FlexRAG. Inference: [inference.md](https://github.com/VectorSpaceLab/LightRAG/tree/main/FlexRAG#inference) Evaluation: [evaluation.md](https://github.com/VectorSpaceLab/LightRAG/blob/main/FlexRAG/examples/evaluation.md) Train: [training.md](https://github.com/VectorSpaceLab/LightRAG/blob/main/FlexRAG/examples/training.md)
+
+## 2. Overview
 
 **LightRAG** is a lightweight and efficient retrieval-augmented generation (RAG) framework that reduces compute overhead while maintaining strong generation quality. Instead of storing and attending to full embeddings of large contexts, it applies **latent context compression**, enabling scalable and efficient generation. The context is first converted into a **compressive embedding** and then **down-sampled** based on a target compression ratio. This ratio can be flexibly allocated in various ways, e.g., according to priority.
 
