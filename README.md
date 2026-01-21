@@ -10,7 +10,7 @@
 
 ## 1. News
 
-* 2026-01-21: We release the code for FlexRAG. Inference: [inference.md](https://github.com/VectorSpaceLab/LightRAG/tree/main/FlexRAG#inference) Evaluation: [evaluation.md](https://github.com/VectorSpaceLab/LightRAG/blob/main/FlexRAG/examples/evaluation.md) Train: [training.md](https://github.com/VectorSpaceLab/LightRAG/blob/main/FlexRAG/examples/training.md)
+* 2026-01-21: We release the code for FlexRAG. Inference: [inference.md](https://github.com/VectorSpaceLab/LightRAG/tree/main/FlexRAG#inference) Evaluation: [evaluation.md](https://github.com/VectorSpaceLab/LightRAG/blob/main/FlexRAG/examples/evaluation.md) Train: [training.md](https://github.com/VectorSpaceLab/LightRAG/blob/main/FlexRAG/examples/training.md) Paper: [FlexRAG](https://dl.acm.org/doi/abs/10.1145/3701551.3703580)
 
 ## 2. Overview
 
