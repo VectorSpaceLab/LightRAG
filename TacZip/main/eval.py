@@ -44,21 +44,6 @@ class TaskArgs:
     seed: int = field(
         default=42,
     )
-    ratio_power_of_two: bool = field( 
-        default=True,
-    ) # whether use ratio which is power of two for dynamic compression
-    use_encoder_at_ratio_one: bool = field(
-        default=False,
-    )
-    use_llmlingua: bool = field(
-        default=False,
-    )
-    use_task_prompt: bool = field(
-        default=False,
-    )
-    task_prompt: str = field(
-        default=None,
-    )
     repetition_penalty: float = field(
         default=1.0,
     )
