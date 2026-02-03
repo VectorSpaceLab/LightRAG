@@ -1,0 +1,11 @@
+torch==2.7.1
+transformers==4.57.3
+deepspeed>=0.14.0
+numpy==1.26.4
+peft
+datasets
+accelerate
+blingfire
+rouge
+fuzzywuzzy
+jieba
