@@ -39,7 +39,7 @@ class TaskArgs:
         default=1,
     )
     output_dir: str = field(
-        default="data/results/longbench"
+        default="data/results"
     )
     seed: int = field(
         default=42,
