@@ -74,8 +74,8 @@ class LoraArgs:
     use_lora: bool = field(
         default=False,
     )
-    peft_model_name_or_path: str = field(
-        default="",
+    peft_model_name_or_path: Optional[str] = field(
+        default=None,
     )
     lora_r: int = field(
         default=8,
