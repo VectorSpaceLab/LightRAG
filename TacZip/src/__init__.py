@@ -30,12 +30,12 @@ def load_model_and_tokenizer(
     config = TacZipConfig(
         model_args.language_model_name_or_path,
         model_args.encoder_name_or_path,
+        model_args.embedding_model_name_or_path,
         model_args.encoder_num_hidden_layers,
     )
 
     model = TacZip(
         config=config,
-        embedding_model_name_or_path=model_args.embedding_model_name_or_path,
         window_mode=model_args.window_mode,
         window=model_args.window,
         lm_max_length=model_args.lm_max_length,
