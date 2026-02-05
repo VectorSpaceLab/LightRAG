@@ -975,12 +975,14 @@ class TacZipConfig(PretrainedConfig):
         self,
         language_model_name_or_path: str = None,
         encoder_name_or_path: str = None,
+        embedding_model_name_or_path: str = None, # text embedding model
         num_hidden_layers: int = 8,
         **kwargs,
     ):
         super().__init__(**kwargs)
         self.language_model_name_or_path = language_model_name_or_path # language model name
         self.encoder_name_or_path = encoder_name_or_path # compressive encoder model name
+        self.embedding_model_name_or_path = embedding_model_name_or_path # embedding model name
         self.num_hidden_layers = num_hidden_layers # the number of encoder layers
         
 
@@ -997,7 +999,6 @@ class TacZip(PreTrainedModel):
         encoder_max_length: int = 4096, # maxinum token length for compressive encoder inputs
         comp_candidates: Optional[List[int]] = None, # compression ratio candidates for training
         pretraining_down_scaling_method: str = "stride", # down scaling method used during pretraing
-        embedding_model_name_or_path: Optional[str] = None, # text embedding model
         embedding_peft_model_name_or_path: Optional[str] = None, # PEFT fine-tuned text embedding model path
         dtype: torch.dtype = torch.bfloat16,
         device_map: Optional[str] = None,
@@ -1036,7 +1037,7 @@ class TacZip(PreTrainedModel):
 
         # * set compression-rate adapter
         self.compression_rate_adapter = CompressionRateAdapter(
-            model_name_or_path=embedding_model_name_or_path,
+            model_name_or_path=config.embedding_model_name_or_path,
             peft_model_name_or_path=embedding_peft_model_name_or_path,
             attn_implementation=attn_implementation,
             accelerator=accelerator,
