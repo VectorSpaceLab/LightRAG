@@ -648,6 +648,7 @@ class CompressionRateAdapter(nn.Module):
                     [{"role": "user", "content": prompt}],
                     tokenize=True,
                     add_generation_prompt=True,
+                    enable_thinking=False,
                 )
             else:
                 input_ids_wo_context = tokenizer(prompt, add_special_tokens=True)["input_ids"]
@@ -659,6 +660,7 @@ class CompressionRateAdapter(nn.Module):
                     [{"role": "user", "content": prompt_w_context}],
                     tokenize=True,
                     add_generation_prompt=True,
+                    enable_thinking=False,
                 )
             else:
                 input_ids_w_context = tokenizer(prompt_w_context, add_special_tokens=True)["input_ids"]
@@ -765,6 +767,7 @@ class CompressionRateAdapter(nn.Module):
                     [{"role": "user", "content": prompt}],
                     tokenize=True,
                     add_generation_prompt=True,
+                    enable_thinking=False,
                 )
             else:
                 input_ids_wo_context = tokenizer(prompt, add_special_tokens=True)["input_ids"]
@@ -776,6 +779,7 @@ class CompressionRateAdapter(nn.Module):
                     [{"role": "user", "content": prompt_w_context}],
                     tokenize=True,
                     add_generation_prompt=True,
+                    enable_thinking=False,
                 )
             else:
                 input_ids_w_context = tokenizer(prompt_w_context, add_special_tokens=True)["input_ids"]

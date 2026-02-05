@@ -27,12 +27,14 @@ class Data:
             messages,
             tokenize=True,
             add_generation_prompt=False,
+            enable_thinking=False,
         )
     
         user_input_ids = tokenizer.apply_chat_template(
             user_messages,
             tokenize=True,
             add_generation_prompt=True, 
+            enable_thinking=False,
         )
     
         labels = [-100] * len(full_input_ids)
@@ -342,6 +344,7 @@ def get_compressive_encoder_inputs(
         [{"role": "user", "content": prompt}],
         tokenize=True,
         add_generation_prompt=True,
+        enable_thinking=False,
     )
     # * tokenize prompt, and then split input_ids into 3 parts
     prompt_w_context = prompt.replace(CONTEXT_TAG, conversations[0]["context"])
@@ -349,6 +352,7 @@ def get_compressive_encoder_inputs(
         [{"role": "user", "content": prompt_w_context}],
         tokenize=True,
         add_generation_prompt=True,
+        enable_thinking=False,
     )
     head_input_ids, tail_input_ids, context_input_ids = CompressionRateAdapter.split_head_tail_context(input_ids_wo_context, input_ids_w_context)
    
