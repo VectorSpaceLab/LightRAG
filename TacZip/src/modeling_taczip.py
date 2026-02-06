@@ -830,9 +830,6 @@ class CompressionRateAdapter(nn.Module):
             padding_side="left",
         ).to(self.embedding_model.model.device)
 
-        # print('p842', p_batch["input_ids"].shape)
-        # print('p843', p_batch["attention_mask"].shape)
-        # print('qi', q_batch["input_ids"].shape)
         output = self.embedding_model(q_batch, p_batch)
         all_scores = output.scores
 
@@ -840,14 +837,10 @@ class CompressionRateAdapter(nn.Module):
             mask = p_batch["attention_mask"][i]
             valid_length = mask.sum().item()
             scores = all_scores[i][-valid_length:]
-            # print('850', scores.shape)
-            # print('all_length_i', all_length[i])
             target_length = math.floor(context_proportion * all_length[i])
-            # print('targer_length', target_length)
 
             important_token_indices = (-scores).argsort()[:target_length].tolist()
             important_token_indices = convert_token_indices(len(scores), important_token_indices, encoder_max_length)
-            # print('852', important_token_indices)
 
             # * adapt compression ratio
             if task_instruction:
@@ -918,10 +911,6 @@ class CompressionRateAdapter(nn.Module):
             # * input_ids and ph_indices
             ph_indices_num, ph_indices, input_ids = self.build_placeholder_sequence(all_head_ids[i], all_tail_ids[i], encoder_indices)
 
-            # print('input_ids', input_ids)
-            # print('encoder_input_ids', encoder_input_ids)
-            # print('ph_indices', ph_indices)
-            # print('encoder_indices', encoder_indices)            
             # * format
             outputs["input_ids"].append(input_ids)
             outputs["encoder_input_ids"].append(encoder_input_ids)
@@ -1162,14 +1151,6 @@ class TacZip(PreTrainedModel):
         for idx, _encoder_indices in enumerate(encoder_indices):
             if not _encoder_indices:
                 continue
-            # try:
-                # _encoder_embeds = self.compressive_encoder(
-                    # encoder_input_ids[[idx]], encoder_attention_mask[[idx]], [_encoder_indices]
-                # )  # [ENCODER_LEN, H]
-            # except:
-                # print('idx', idx)
-                # print('es', encoder_input_ids.shape)
-                # exit()
             _encoder_embeds = self.compressive_encoder(
                 encoder_input_ids[[idx]], encoder_attention_mask[[idx]], [_encoder_indices]
             )  # [ENCODER_LEN, H]
