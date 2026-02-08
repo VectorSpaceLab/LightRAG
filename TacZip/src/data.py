@@ -33,7 +33,7 @@ class Data:
         user_input_ids = tokenizer.apply_chat_template(
             user_messages,
             tokenize=True,
-            add_generation_prompt=True, 
+            add_generation_prompt=True,
             enable_thinking=False,
         )
     
@@ -364,7 +364,7 @@ def get_compressive_encoder_inputs(
         context_input_ids = context_input_ids[:half] + context_input_ids[-half:]
 
     # * encoder input_ids
-    encoder_input_ids_wo_task_instruction = CompressionRateAdapter.get_encoder_input_ids(context_input_ids,encoder_max_length)
+    encoder_input_ids_wo_task_instruction = CompressionRateAdapter.get_encoder_input_ids(context_input_ids, encoder_max_length, bos_token_id=tokenizer.bos_token_id)
         
     # merge multiple encoder_input_ids
     encoder_input_ids_merged = [[]]
@@ -576,7 +576,6 @@ class TokenLevelTrainDataset(Dataset):
         dataset = datasets.concatenate_datasets(dataset_list)
         self.dataset = dataset
         self.total_len = len(self.dataset)
-        self.print_flag = True
         self.query_instruction_for_retrieval = query_instruction_for_retrieval
 
     def __len__(self):
