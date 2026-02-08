@@ -9,3 +9,4 @@ blingfire
 rouge
 fuzzywuzzy
 jieba
+sentencepiece
