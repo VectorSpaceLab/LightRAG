@@ -170,8 +170,8 @@ def main():
     metrics_dict = {}
     
     for dataset_name in task_args.dataset_names:
-        # Empirically, chat templates tend to be suboptimal for in-context learning tasks.
-        if dataset_name in ["trec_fine", "banking77", "clinc150"]:
+        # Empirically, chat templates tend to be suboptimal for in-context learning tasks when using Llama2.
+        if dataset_name in ["trec_fine", "banking77", "clinc150"] and "Llama2" in model_args.model_name_or_path:
             apply_chat_template = False
         else:
             apply_chat_template = True
