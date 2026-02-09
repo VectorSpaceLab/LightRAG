@@ -106,9 +106,24 @@ def main():
                 logging.info(f"Freeze the parameters for {k}")
                 v.requires_grad = False
 
+    # Configure EOS token based on the model architecture
+    if model_args.tokenizer_name:
+        tokenizer_name = model_args.tokenizer_name
+    else:
+        tokenizer_name = model_args.language_model_name_or_path
+
+    if "Qwen3-Embedding" in tokenizer_name:
+        # Qwen3 embedding models automatically add EOS tokens internally, no need to manually add them during input processing
+        eos_token = ""
+    elif "Qwen3" in tokenizer_name:
+        eos_token = "<|endoftext|>"
+    else:
+        eos_token = " </s>"
+
     if training_args.enable_token_level_retrieval:
         train_dataset = TokenLevelTrainDataset(
             data_files=task_args.data_files,
+            eos_token=eos_token,
         )
         data_collator = TokenLevelEmbedCollator(
             tokenizer=tokenizer,

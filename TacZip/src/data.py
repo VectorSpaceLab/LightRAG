@@ -567,6 +567,7 @@ class TokenLevelTrainDataset(Dataset):
         self,
         data_files,
         query_instruction_for_retrieval = None,
+        eos_token = " </s>",
     ):
         dataset_list = []
         for data_file in data_files:
@@ -577,13 +578,14 @@ class TokenLevelTrainDataset(Dataset):
         self.dataset = dataset
         self.total_len = len(self.dataset)
         self.query_instruction_for_retrieval = query_instruction_for_retrieval
+        self.eos_token = eos_token
 
     def __len__(self):
         return self.total_len
 
     def __getitem__(self, item) -> Tuple[BatchEncoding, List[BatchEncoding]]:
         query = self.dataset[item]['query']
-        query = query + ' </s>'
+        query = query + self.eos_token
         if self.query_instruction_for_retrieval:
             query = self.query_instruction_for_retrieval + query
     
