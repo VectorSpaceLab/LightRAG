@@ -38,7 +38,7 @@ class BiEncoderModel(nn.Module):
         self,
         model_name: str = None,
         peft_model_name: str = None,
-        normlized: bool = False,
+        normalized: bool = True,
         pooling_method: str = 'cls',
         negatives_cross_device: bool = False,
         temperature: float = 1.0,
@@ -51,6 +51,7 @@ class BiEncoderModel(nn.Module):
         self.model = AutoModel.from_pretrained(model_name, dtype=torch.bfloat16, attn_implementation=attn_implementation)
         if peft_model_name:
             self.model = PeftModel.from_pretrained(self.model, peft_model_name, dtype=torch.bfloat16, is_trainable=False)
+            self.model = self.model.merge_and_unload()
         
         if accelerator:
             self.accelerate = accelerator
@@ -74,11 +75,10 @@ class BiEncoderModel(nn.Module):
             self.model.print_trainable_parameters()
 
         self.cross_entropy = nn.CrossEntropyLoss(reduction='mean')
-        self.normlized = normlized
+        self.normalized = normalized
         self.pooling_method = pooling_method
         self.temperature = temperature
-        self.print_flag = True
-        if not normlized:
+        if not normalized:
             self.temperature = 1.0
 
         self.negatives_cross_device = negatives_cross_device
@@ -112,7 +112,7 @@ class BiEncoderModel(nn.Module):
         if features is None:
             return None
         psg_out = self.model(**features, return_dict=True)
-        if self.normlized:
+        if self.normalized:
             last_hidden_state = torch.nn.functional.normalize(psg_out.last_hidden_state, dim=-1)
         else:
             last_hidden_state = psg_out.last_hidden_state
@@ -424,9 +424,8 @@ class CompressionRateAdapter(nn.Module):
         label_padding_value: int = -100,
         model_name_or_path: str = None,
         peft_model_name_or_path: str = None,
-        normlized: bool = False,
+        normalized: bool = True,
         pooling_method: str = 'cls',
-        negatives_cross_device: bool = False,
         temperature: float = 0.02,
         lora_tune: bool = False,
         attn_implementation: str = "flash_attention_2",
@@ -440,9 +439,8 @@ class CompressionRateAdapter(nn.Module):
             self.embedding_model = BiEncoderModel(
                 model_name=model_name_or_path,
                 peft_model_name=peft_model_name_or_path,
-                normlized=normlized,
+                normalized=normalized,
                 pooling_method=pooling_method,
-                negatives_cross_device=negatives_cross_device,
                 temperature=temperature,
                 lora_tune=lora_tune,
                 attn_implementation=attn_implementation,
@@ -989,6 +987,9 @@ class TacZip(PreTrainedModel):
         comp_candidates: Optional[List[int]] = None, # compression ratio candidates for training
         pretraining_down_scaling_method: str = "stride", # down scaling method used during pretraing
         embedding_peft_model_name_or_path: Optional[str] = None, # PEFT fine-tuned text embedding model path
+        normalized: bool = True, # whether to apply normalization to embedding model outputs last hidden states
+        pooling_method: str = 'cls', # pooling method for query embeddings
+        temperature: float = 0.02, # embedding model's temperature
         dtype: torch.dtype = torch.bfloat16,
         device_map: Optional[str] = None,
         attn_implementation: str = "flash_attention_2",
@@ -1028,6 +1029,9 @@ class TacZip(PreTrainedModel):
         self.compression_rate_adapter = CompressionRateAdapter(
             model_name_or_path=config.embedding_model_name_or_path,
             peft_model_name_or_path=embedding_peft_model_name_or_path,
+            normalized=normalized,
+            pooling_method=pooling_method,
+            temperature=temperature,
             attn_implementation=attn_implementation,
             accelerator=accelerator,
         )

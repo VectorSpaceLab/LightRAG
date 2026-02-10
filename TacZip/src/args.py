@@ -149,7 +149,7 @@ class TrainingArgs(TrainingArguments):
         default='cls', 
         metadata={"help": "the pooling method, should be cls or mean"}
     )
-    normlized: bool = field(
+    normalized: bool = field(
         default=True
     )
     enable_token_level_retrieval: bool = field(

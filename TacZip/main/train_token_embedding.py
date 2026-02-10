@@ -91,7 +91,7 @@ def main():
     model = BiEncoderModel(
         model_name=model_args.embedding_model_name_or_path,
         peft_model_name=lora_args.peft_model_name_or_path,
-        normlized=training_args.normlized,
+        normalized=training_args.normalized,
         pooling_method=training_args.pooling_method,
         negatives_cross_device=training_args.negatives_cross_device,
         temperature=training_args.temperature,
