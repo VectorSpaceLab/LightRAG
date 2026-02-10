@@ -489,12 +489,7 @@ class TokenLevelEmbedCollator(DataCollatorWithPadding):
         total_length = p_collated['input_ids'].size(1)
         tags = torch.zeros(total_length)
 
-        try:
-            tags[gold_indices[0]] = 1 
-        except:
-            print('gold_indices', gold_indices)
-            print('total_length', total_length)
-            exit()        
+        tags[gold_indices[0]] = 1 
         gold_indices = torch.tensor(gold_indices)
 
         return {"query": q_collated, "passage": p_collated, "tags": tags, "gold_indices": gold_indices}
