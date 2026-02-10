@@ -16,18 +16,10 @@ Please download the training data from [TacZip-Data]( https://huggingface.co/dat
 ### Pretrain
 
 ```bash
-# * set ddp
-if [[ $WORLD_SIZE ]]; then
-DDP="--nnodes=$WORLD_SIZE --node_rank=$RANK --master_addr=$MASTER_ADDR"
-else
-DDP=""
-fi
-
-# * train
 OUTPUE_NAME=taczip-llama2-pretrain
 mkdir -p data/outputs/compressive_encoder/pretrain/${OUTPUE_NAME}
 
-torchrun --nproc_per_node 8 ${DDP} -m main.train_compressive_encoder \
+torchrun --nproc_per_node 8 -m main.train_compressive_encoder \
 --language_model_name_or_path meta-llama/Llama-2-7b-chat-hf \
 --window_mode True \
 --min_length 1024 \
@@ -51,14 +43,6 @@ torchrun --nproc_per_node 8 ${DDP} -m main.train_compressive_encoder \
 ### Finetune
 
 ```bash
-# * set ddp
-if [[ $WORLD_SIZE ]]; then
-DDP="--nnodes=$WORLD_SIZE --node_rank=$RANK --master_addr=$MASTER_ADDR"
-else
-DDP=""
-fi
-
-# * train
 OUTPUE_NAME=taczip-llama2-longalpaca
 mkdir -p data/outputs/compressive_encoder/ft/${OUTPUE_NAME}
 
@@ -89,14 +73,6 @@ torchrun --nproc_per_node 8 -m main.train_compressive_encoder \
 ```
 
 ```bash
-# * set ddp
-if [[ $WORLD_SIZE ]]; then
-DDP="--nnodes=$WORLD_SIZE --node_rank=$RANK --master_addr=$MASTER_ADDR"
-else
-DDP=""
-fi
-
-# * train
 OUTPUE_NAME=taczip-llama2-multitask-ft
 mkdir -p data/outputs/compressive_encoder/ft/${OUTPUE_NAME}
 
@@ -133,18 +109,10 @@ torchrun --nproc_per_node 8 -m main.train_compressive_encoder \
 ### Pretrain
 
 ```bash
-# * set ddp
-if [[ $WORLD_SIZE ]]; then
-DDP="--nnodes=$WORLD_SIZE --node_rank=$RANK --master_addr=$MASTER_ADDR"
-else
-DDP=""
-fi
-
-# * train
 OUTPUE_NAME=taczip-qwen3-pretrain
 mkdir -p data/outputs/compressive_encoder/${OUTPUE_NAME}
 
-torchrun --nproc_per_node 8 ${DDP} -m main.train_compressive_encoder \
+torchrun --nproc_per_node 8 -m main.train_compressive_encoder \
 --language_model_name_or_path Qwen/Qwen3-8B \
 --window_mode True \
 --min_length 1024 \
@@ -170,14 +138,6 @@ torchrun --nproc_per_node 8 ${DDP} -m main.train_compressive_encoder \
 ### Finetune
 
 ```bash
-# * set ddp
-if [[ $WORLD_SIZE ]]; then
-DDP="--nnodes=$WORLD_SIZE --node_rank=$RANK --master_addr=$MASTER_ADDR"
-else
-DDP=""
-fi
-
-# * train
 OUTPUE_NAME=taczip-qwen3-longalpaca
 mkdir -p data/outputs/compressive_encoder/ft/${OUTPUE_NAME}
 
@@ -208,14 +168,6 @@ torchrun --nproc_per_node 8 -m main.train_compressive_encoder \
 ```
 
 ```bash
-# * set ddp
-if [[ $WORLD_SIZE ]]; then
-DDP="--nnodes=$WORLD_SIZE --node_rank=$RANK --master_addr=$MASTER_ADDR"
-else
-DDP=""
-fi
-
-# * train
 OUTPUE_NAME=taczip-qwen3-multitask-ft
 mkdir -p data/outputs/compressive_encoder/ft/${OUTPUE_NAME}
 
