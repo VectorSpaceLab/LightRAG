@@ -44,3 +44,14 @@ The project includes two solutions:
   <br>
   <em>Overview of TacZip.</em>
 </p>
+**References:**
+
+```
+@inproceedings{wu2025lighter,
+  title={Lighter and better: Towards flexible context adaptation for retrieval augmented generation},
+  author={Wu, Chenyuan and Shao, Ninglu and Liu, Zheng and Xiao, Shitao and Li, Chaozhuo and Zhang, Chen and Wang, Senzhang and Lian, Defu},
+  booktitle={Proceedings of the Eighteenth ACM International Conference on Web Search and Data Mining},
+  pages={271--280},
+  year={2025}
+}
+```
