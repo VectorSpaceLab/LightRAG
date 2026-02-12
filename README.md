@@ -12,6 +12,7 @@
 
 ## 1. News
 
+* 2026-02-12: TacZip training and evaluation datasets are available on Hugging Face: [TacZip-Data](https://huggingface.co/datasets/wcyno23/TacZip-Data).
 * 2026-02-03: ⚡Released task aware context compression model:  [TacZip-Qwen3-8b](https://huggingface.co/wcyno23/TacZip-Qwen3-8b) and [TacZip-Llama2-7b](https://huggingface.co/wcyno23/TacZip-Llama2-7b).
 * 2026-01-21: We release the code for FlexRAG. Inference: [inference.md](https://github.com/VectorSpaceLab/LightRAG/tree/main/FlexRAG#inference) Evaluation: [evaluation.md](https://github.com/VectorSpaceLab/LightRAG/blob/main/FlexRAG/examples/evaluation.md) Train: [training.md](https://github.com/VectorSpaceLab/LightRAG/blob/main/FlexRAG/examples/training.md) Paper: [FlexRAG](https://dl.acm.org/doi/abs/10.1145/3701551.3703580).
 
