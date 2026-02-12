@@ -39,3 +39,8 @@ The project includes two solutions:
 
 - **FlexRAG** — Provides flexible context adaptation for question‑answering tasks.
 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/VectorSpaceLab/LightRAG/refs/heads/main/TacZip/assets/framework.png" width="95%">
+  <br>
+  <em>Overview of TacZip.</em>
+</p>
