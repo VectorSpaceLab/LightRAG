@@ -21,3 +21,16 @@ pip install -r requirements.txt
 pip install flash-attn --no-build-isolation
 ```
 
+### Usage
+
+#### Inference
+
+See [inference section](./examples/inference.md).
+
+#### Evaluation
+
+See [evaluation section](./example/evaluation.md).
+
+#### Training
+
+See [compressive encoder training section](./examples/training_compressive_encoder.md) and [token embedding training section](./examples/training_token_embedding.md).
