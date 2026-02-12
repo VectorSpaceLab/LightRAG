@@ -8,7 +8,7 @@ The training process consists of two stages:
 * Finetune (Token-level Retrieval)
   * 12K samples from HotpotQA, NQ, MulitNews, GovReport, and ARC-challenge. Important tokens were selected using GPT-4o.
 
-Please download the training data from [TacZip-Data]( https://huggingface.co/datasets/wcyno23/TacZip-Data/tree/main/train/compressive_encoder) and [bge-multilingual-gemma2-data](https://huggingface.co/datasets/hanhainebula/bge-multilingual-gemma2-data/tree/main/en/MSMARCO), and place it under the `data` directory.
+Please download the training data from [TacZip-Data](https://huggingface.co/datasets/wcyno23/TacZip-Data/tree/main/train/token_embedding) and [bge-multilingual-gemma2-data](https://huggingface.co/datasets/hanhainebula/bge-multilingual-gemma2-data/tree/main/en/MSMARCO), and place it under the `data` directory.
 
 ## Llama2-7B
 
