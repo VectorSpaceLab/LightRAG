@@ -44,7 +44,9 @@ The project includes two solutions:
   <br>
   <em>Overview of TacZip.</em>
 </p>
-**References:**
+
+
+#### References:
 
 ```
 @inproceedings{wu2025lighter,
