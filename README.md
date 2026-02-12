@@ -9,8 +9,9 @@
 <a href="https://github.com/"><img alt="License" src="https://img.shields.io/badge/Apache-2.0-green"></a>
 </div>
 <h4 align="center">
-
 ## 1. News
+
+* 2026-02-12：Released TacZip codebase. Inference: [inference.md](https://github.com/VectorSpaceLab/LightRAG/blob/main/TacZip/examples/inference.md) Evaluation: [evaluation.md](https://github.com/VectorSpaceLab/LightRAG/blob/main/TacZip/examples/evaluation.md) Train: [training_compressive_encoder.md](https://github.com/VectorSpaceLab/LightRAG/blob/main/TacZip/examples/training_compressive_encoder.md) and [training_token_embedding.md](https://github.com/VectorSpaceLab/LightRAG/blob/main/TacZip/examples/training_token_embedding.md).
 
 * 2026-02-12: TacZip training and evaluation datasets are available on Hugging Face: [TacZip-Data](https://huggingface.co/datasets/wcyno23/TacZip-Data).
 * 2026-02-03: ⚡Released task aware context compression model:  [TacZip-Qwen3-8b](https://huggingface.co/wcyno23/TacZip-Qwen3-8b) and [TacZip-Llama2-7b](https://huggingface.co/wcyno23/TacZip-Llama2-7b).
