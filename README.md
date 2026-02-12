@@ -9,6 +9,7 @@
 <a href="https://github.com/"><img alt="License" src="https://img.shields.io/badge/Apache-2.0-green"></a>
 </div>
 <h4 align="center">
+
 ## 1. News
 
 * 2026-02-12：Released TacZip codebase. Inference: [inference.md](https://github.com/VectorSpaceLab/LightRAG/blob/main/TacZip/examples/inference.md) Evaluation: [evaluation.md](https://github.com/VectorSpaceLab/LightRAG/blob/main/TacZip/examples/evaluation.md) Train: [training_compressive_encoder.md](https://github.com/VectorSpaceLab/LightRAG/blob/main/TacZip/examples/training_compressive_encoder.md) and [training_token_embedding.md](https://github.com/VectorSpaceLab/LightRAG/blob/main/TacZip/examples/training_token_embedding.md).
