@@ -9,7 +9,7 @@
 <a href="https://huggingface.co/datasets/wcyno23/TacZip-Data" target="_blank"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20TacZip--Data-ff69b4.svg"></a>
 </div>
 <h4 align="center">
-![](./assets/framework.png)
+![](https://github.com/VectorSpaceLab/LightRAG/blob/main/TacZip/assets/framework.png)
 
 ### Environment
 
