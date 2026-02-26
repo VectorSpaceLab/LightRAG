@@ -1,6 +1,5 @@
-<p align="center">
-  <img src="https://raw.githubusercontent.com/VectorSpaceLab/LightRAG/refs/heads/main/TacZip/assets/taczip_logo.png" width="65%">
-</p>
+<h1 align="center">AceRAG</h1>
+
 
 <div align="center">
 <a href="https://dl.acm.org/doi/abs/10.1145/3701551.3703580" target="_blank"><img src="https://img.shields.io/badge/ACM%20DL-Paper-blue?logo=acm"></a>
@@ -30,7 +29,7 @@ See [inference section](./examples/inference.md).
 
 #### Evaluation
 
-See [evaluation section](./example/evaluation.md).
+See [evaluation section](./examples/evaluation.md).
 
 #### Training
 
