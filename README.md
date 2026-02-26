@@ -35,7 +35,7 @@ LightRAG is built around four core design principles:
 
 The project includes two solutions:
 
-* **TacZip** — Delivers task-aware context compression with fine-grained, token-level ratio allocation.
+* **AceRAG** — Delivers task-aware context compression with fine-grained, token-level ratio allocation.
 
 - **FlexRAG** — Provides flexible context adaptation for question‑answering tasks.
 
