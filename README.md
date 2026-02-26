@@ -12,7 +12,7 @@
 
 ## 1. News
 
-* 2026-02-12：Released TacZip codebase. Inference: [inference.md](https://github.com/VectorSpaceLab/LightRAG/blob/main/TacZip/examples/inference.md) Evaluation: [evaluation.md](https://github.com/VectorSpaceLab/LightRAG/blob/main/TacZip/examples/evaluation.md) Train: [training_compressive_encoder.md](https://github.com/VectorSpaceLab/LightRAG/blob/main/TacZip/examples/training_compressive_encoder.md) and [training_token_embedding.md](https://github.com/VectorSpaceLab/LightRAG/blob/main/TacZip/examples/training_token_embedding.md).
+* 2026-02-12：Released TacZip codebase. Inference: [inference.md](https://github.com/VectorSpaceLab/LightRAG/blob/main/AceRAG/examples/inference.md) Evaluation: [evaluation.md](https://github.com/VectorSpaceLab/LightRAG/blob/main/AceRAG/examples/evaluation.md) Train: [training_compressive_encoder.md](https://github.com/VectorSpaceLab/LightRAG/blob/main/AceRAG/examples/training_compressive_encoder.md) and [training_token_embedding.md](https://github.com/VectorSpaceLab/LightRAG/blob/main/AceRAG/examples/training_token_embedding.md).
 
 * 2026-02-12: TacZip training and evaluation datasets are available on Hugging Face: [TacZip-Data](https://huggingface.co/datasets/wcyno23/TacZip-Data).
 * 2026-02-03: ⚡Released task aware context compression model:  [TacZip-Qwen3-8b](https://huggingface.co/wcyno23/TacZip-Qwen3-8b) and [TacZip-Llama2-7b](https://huggingface.co/wcyno23/TacZip-Llama2-7b).
@@ -40,9 +40,9 @@ The project includes two solutions:
 - **FlexRAG** — Provides flexible context adaptation for question‑answering tasks.
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/VectorSpaceLab/LightRAG/refs/heads/main/TacZip/assets/framework.png" width="90%">
+  <img src="https://raw.githubusercontent.com/VectorSpaceLab/LightRAG/refs/heads/main/AceRAG/assets/framework.png" width="90%">
   <br>
-  <em>Overview of TacZip.</em>
+  <em>Overview of AceRAG.</em>
 </p>
 
 
