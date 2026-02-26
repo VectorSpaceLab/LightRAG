@@ -15,8 +15,8 @@
 You can install the necessary dependencies using the following command. Recommended Python version is 3.10+.
 
 ```bash
-conda create -n taczip python=3.10
-conda activate taczip
+conda create -n acerag python=3.10
+conda activate acerag
 pip install -r requirements.txt
 pip install flash-attn --no-build-isolation
 ```
