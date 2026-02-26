@@ -1,6 +1,6 @@
 # Evaluation
 
-TacZip is benchmarked across five task categories: Long-sequence Multi-document QA(**LMQA**), Open-Domain QA(**ODQA**), Summarization(**SUM**), In-Context Learning(**ICL**) and Commonsense Reasoning(**Reasoning**).
+AceRAG is benchmarked across five task categories: Long-sequence Multi-document QA(**LMQA**), Open-Domain QA(**ODQA**), Summarization(**SUM**), In-Context Learning(**ICL**) and Commonsense Reasoning(**Reasoning**).
 
 - **LMQA**: HotpotQA, 2WikiMQA and Musique
 
@@ -20,13 +20,13 @@ All experiment scripts are available in the `experiments` directory. The evaluat
 #### TacZip-Llama2-7b
 
 ```bash
-bash experiments/eval_uniform_compression_taczip_llama2_7b.sh
+bash experiments/eval_uniform_compression_acerag_llama2_7b.sh
 ```
 
 #### TacZip-Qwen3-8b
 
 ```bash
-bash experiments/eval_uniform_compression_taczip_qwen3_8b.sh
+bash experiments/eval_uniform_compression_acerag_qwen3_8b.sh
 ```
 
 
@@ -35,10 +35,10 @@ bash experiments/eval_uniform_compression_taczip_qwen3_8b.sh
 #### TacZip-Llama2-7b
 
 ```bash
-bash experiments/eval_token_level_selective_compression_taczip_llama2_7b.sh
+bash experiments/eval_token_level_selective_compression_acerag_llama2_7b.sh
 ```
 #### TacZip-Qwen3-8b
 
 ```bash
-bash experiments/eval_token_level_selective_compression_taczip_qwen3_8b.sh
+bash experiments/eval_token_level_selective_compression_acerag_qwen3_8b.sh
 ```
