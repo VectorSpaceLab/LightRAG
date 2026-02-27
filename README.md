@@ -2,9 +2,9 @@
 
 <div align="center">
 <a href="https://dl.acm.org/doi/abs/10.1145/3701551.3703580" target="_blank"><img src="https://img.shields.io/badge/ACM%20DL-Paper-blue?logo=acm"></a>
-<a href="https://huggingface.co/wcyno23/TacZip-Qwen3-8b" target="_blank"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20TacZip--Qwen3--8b-orange"></a>
-<a href="https://huggingface.co/wcyno23/TacZip-Llama2-7b" target="_blank"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20TacZip--Llama2--7b-orange"></a>
-<a href="https://huggingface.co/datasets/wcyno23/TacZip-Data" target="_blank"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20TacZip--Data-ff69b4.svg"></a>
+<a href="https://huggingface.co/wcyno23/AceRAG-Qwen3-8b" target="_blank"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20AceRAG--Qwen3--8b-orange"></a>
+<a href="https://huggingface.co/wcyno23/AceRAG-Llama2-7b" target="_blank"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20AceRAG--Llama2--7b-orange"></a>
+<a href="https://huggingface.co/datasets/wcyno23/AceRAG-Data" target="_blank"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20AceRAG--Data-ff69b4.svg"></a>
 <a href="https://huggingface.co/wcyno23/FlexRAG" target="_blank"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20FlexRAG%20Model-27b3b4.svg"></a>
 <a href="https://github.com/"><img alt="License" src="https://img.shields.io/badge/Apache-2.0-green"></a>
 </div>
@@ -12,10 +12,10 @@
 
 ## 1. News
 
-* 2026-02-12：Released TacZip codebase. Inference: [inference.md](https://github.com/VectorSpaceLab/LightRAG/blob/main/AceRAG/examples/inference.md) Evaluation: [evaluation.md](https://github.com/VectorSpaceLab/LightRAG/blob/main/AceRAG/examples/evaluation.md) Train: [training_compressive_encoder.md](https://github.com/VectorSpaceLab/LightRAG/blob/main/AceRAG/examples/training_compressive_encoder.md) and [training_token_embedding.md](https://github.com/VectorSpaceLab/LightRAG/blob/main/AceRAG/examples/training_token_embedding.md).
+* 2026-02-12：Released AceRAG codebase. Inference: [inference.md](https://github.com/VectorSpaceLab/LightRAG/blob/main/AceRAG/examples/inference.md) Evaluation: [evaluation.md](https://github.com/VectorSpaceLab/LightRAG/blob/main/AceRAG/examples/evaluation.md) Train: [training_compressive_encoder.md](https://github.com/VectorSpaceLab/LightRAG/blob/main/AceRAG/examples/training_compressive_encoder.md) and [training_token_embedding.md](https://github.com/VectorSpaceLab/LightRAG/blob/main/AceRAG/examples/training_token_embedding.md).
 
-* 2026-02-12: TacZip training and evaluation datasets are available on Hugging Face: [TacZip-Data](https://huggingface.co/datasets/wcyno23/TacZip-Data).
-* 2026-02-03: ⚡Released task aware context compression model:  [TacZip-Qwen3-8b](https://huggingface.co/wcyno23/TacZip-Qwen3-8b) and [TacZip-Llama2-7b](https://huggingface.co/wcyno23/TacZip-Llama2-7b).
+* 2026-02-12: AceRAG training and evaluation datasets are available on Hugging Face: [AceRAG-Data](https://huggingface.co/datasets/wcyno23/AceRAG-Data).
+* 2026-02-03: ⚡Released task aware context compression model:  [AceRAG-Qwen3-8b](https://huggingface.co/wcyno23/AceRAG-Qwen3-8b) and [AceRAG-Llama2-7b](https://huggingface.co/wcyno23/AceRAG-Llama2-7b).
 * 2026-01-21: We release the code for FlexRAG. Inference: [inference.md](https://github.com/VectorSpaceLab/LightRAG/tree/main/FlexRAG#inference) Evaluation: [evaluation.md](https://github.com/VectorSpaceLab/LightRAG/blob/main/FlexRAG/examples/evaluation.md) Train: [training.md](https://github.com/VectorSpaceLab/LightRAG/blob/main/FlexRAG/examples/training.md) Paper: [FlexRAG](https://dl.acm.org/doi/abs/10.1145/3701551.3703580).
 
 ## 2. Overview
