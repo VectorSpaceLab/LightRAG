@@ -3,7 +3,7 @@ cd $(dirname $SHELL_FOLDER)
 
 # LMQA, SUM, ICL, Reasoning
 torchrun --nproc_per_node 8 -m main.eval \
---model_name_or_path wcyno23/TacZip-Qwen3-8b \
+--model_name_or_path wcyno23/AceRAG-Qwen3-8b \
 --window_mode false \
 --lm_max_length 3500 \
 --encoder_num_hidden_layers 8 \
@@ -17,7 +17,7 @@ torchrun --nproc_per_node 8 -m main.eval \
 
 # ODQA
 torchrun --nproc_per_node 8 -m main.eval \
---model_name_or_path wcyno23/TacZip-Qwen3-8b \
+--model_name_or_path wcyno23/AceRAG-Qwen3-8b \
 --window_mode false \
 --lm_max_length 4096 \
 --encoder_num_hidden_layers 8 \

@@ -955,8 +955,8 @@ class CausalLMOutputForWindow(CausalLMOutput):
     window_valid_token_num: Optional[List[int]] = None
 
 
-class TacZipConfig(PretrainedConfig):
-    model_type = "TacZip"
+class AceRAGConfig(PretrainedConfig):
+    model_type = "AceRAG"
 
     def __init__(
         self,
@@ -973,13 +973,13 @@ class TacZipConfig(PretrainedConfig):
         self.num_hidden_layers = num_hidden_layers # the number of encoder layers
         
 
-class TacZip(PreTrainedModel):
-    config_class = TacZipConfig
-    base_model_prefix = "taczip"
+class AceRAG(PreTrainedModel):
+    config_class = AceRAGConfig
+    base_model_prefix = "acerag"
 
     def __init__(
         self, 
-        config: TacZipConfig,
+        config: AceRAGConfig,
         window_mode: bool = False, # enable two stream auto regressive training
         window: int = 1024, # window size when perfroming two stream auto regressive training
         lm_max_length: int = 4096, # maximum token length for language model inputs

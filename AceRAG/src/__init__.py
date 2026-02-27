@@ -5,7 +5,7 @@ from transformers import AutoTokenizer
 from src.args import ModelArgs, LoraArgs
 from src.data import CONTEXT_TAG
 from src.utils import str_to_torch_dtype
-from src.modeling_taczip import TacZip, TacZipConfig
+from src.modeling_acerag import AceRAG, AceRAGConfig
 
 logger = logging.getLogger(__name__)
 
@@ -27,14 +27,14 @@ def load_model_and_tokenizer(
         logger.info("Only return tokenizer.")
         return tokenizer
     
-    config = TacZipConfig(
+    config = AceRAGConfig(
         model_args.language_model_name_or_path,
         model_args.encoder_name_or_path,
         model_args.embedding_model_name_or_path,
         model_args.encoder_num_hidden_layers,
     )
 
-    model = TacZip(
+    model = AceRAG(
         config=config,
         window_mode=model_args.window_mode,
         window=model_args.window,

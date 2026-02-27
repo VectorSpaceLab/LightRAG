@@ -9,7 +9,7 @@ from typing import Any, Dict, List, Optional, Tuple
 from transformers import BatchEncoding, DataCollatorWithPadding
 from transformers.tokenization_utils import PreTrainedTokenizer
 from transformers.utils import logging
-from src.modeling_taczip import CompressionRateAdapter
+from src.modeling_acerag import CompressionRateAdapter
 
 logger = logging.get_logger(__name__)
 PH_TOKEN_ID = 100

@@ -7,7 +7,7 @@ from transformers import TrainingArguments
 class ModelArgs:
     # * base model
     model_name_or_path: str = field(
-        default="wcyno23/TacZip-Llama2-7b",
+        default="wcyno23/AceRAG-Llama2-7b",
     )
     language_model_name_or_path: str = field(
         default="meta-llama/Llama-2-7b-chat-hf",

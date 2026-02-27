@@ -5,7 +5,7 @@ from dataclasses import dataclass, field
 from transformers import AutoConfig, AutoTokenizer, HfArgumentParser, set_seed
 from src.data import SequenceLevelEmbedCollator, TokenLevelEmbedCollator, SequenceLevelTrainDataset, TokenLevelTrainDataset
 from src.trainer import BiTrainer
-from src.modeling_taczip import BiEncoderModel
+from src.modeling_acerag import BiEncoderModel
 from src.data import CONTEXT_TAG
 from src.args import LoraArgs, ModelArgs, TrainingArgs
 
