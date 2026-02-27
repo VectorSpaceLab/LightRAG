@@ -77,7 +77,7 @@ inputs = model.compression_rate_adapter.token_level_adaptation(
     low_comp_ratio=1,
 )
 
-inputs = model._move_to_device(inputs, model.device)
+inputs = model._move_to_device(inputs)
 outputs = model.generate(**inputs)
 outputs = outputs[:, inputs["input_ids"].shape[1]:] # return only generated
 print(f"Question: {questions[0]}")
@@ -161,7 +161,7 @@ inputs = model.compression_rate_adapter.token_level_adaptation(
     low_comp_ratio=1,
 )
 
-inputs = model._move_to_device(inputs, model.device)
+inputs = model._move_to_device(inputs)
 outputs = model.generate(**inputs)
 outputs = outputs[:, inputs["input_ids"].shape[1]:] # return only generated
 print(f"Question: {questions[0]}")
