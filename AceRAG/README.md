@@ -3,9 +3,9 @@
 
 <div align="center">
 <a href="https://dl.acm.org/doi/abs/10.1145/3701551.3703580" target="_blank"><img src="https://img.shields.io/badge/ACM%20DL-Paper-blue?logo=acm"></a>
-<a href="https://huggingface.co/wcyno23/TacZip-Qwen3-8b" target="_blank"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20TacZip--Qwen3--8b-orange"></a>
-<a href="https://huggingface.co/wcyno23/TacZip-Llama2-7b" target="_blank"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20TacZip--Llama2--7b-orange"></a>
-<a href="https://huggingface.co/datasets/wcyno23/TacZip-Data" target="_blank"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20TacZip--Data-ff69b4.svg"></a>
+<a href="https://huggingface.co/wcyno23/AceRAG-Qwen3-8b" target="_blank"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20AceRAG--Qwen3--8b-orange"></a>
+<a href="https://huggingface.co/wcyno23/AceRAG-Llama2-7b" target="_blank"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20AceRAG--Llama2--7b-orange"></a>
+<a href="https://huggingface.co/datasets/wcyno23/AceRAG-Data" target="_blank"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20AceRAG--Data-ff69b4.svg"></a>
 </div>
 <h4 align="center">
 
