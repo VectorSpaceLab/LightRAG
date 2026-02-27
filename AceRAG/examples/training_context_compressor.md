@@ -9,7 +9,7 @@ The training process consists of two stages:
   - 10K samples from [LongAlpaca](https://huggingface.co/datasets/Yukang/LongAlpaca-12k)
   - 130K samples from HotpotQA, NQ, MulitNews, GovReport, TREC-fine, Banking7, ARC-easy and ARC-challenge.
 
-Please download the training data from [AceRAG-Data]( https://huggingface.co/datasets/wcyno23/AceRAG-Data/tree/main/train/compressive_encoder) and place it under the `data` directory.
+Please download the training data from [AceRAG-Data]( https://huggingface.co/datasets/wcyno23/AceRAG-Data/tree/main/train/context_compressor) and place it under the `data` directory.
 
 ## Llama2-7B
 
