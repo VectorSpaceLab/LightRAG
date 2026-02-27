@@ -18,13 +18,13 @@ The base model is [Yukang/Llama-2-7b-longlora-32k-ft](https://huggingface.co/Yuk
 
 ```bash
 OUTPUE_NAME=llama2-pretrain-msmarco
-mkdir -p data/outputs/token_embedding/pretrain/${OUTPUE_NAME}
+mkdir -p data/outputs/token_level_estimator/pretrain/${OUTPUE_NAME}
 
-torchrun --nproc_per_node 8 -m main.train_token_embedding \
---output_dir data/outputs/token_embedding/pretrain/${OUTPUE_NAME} \
+torchrun --nproc_per_node 8 -m main.train_token_level_estimator \
+--output_dir data/outputs/token_level_estimator/pretrain/${OUTPUE_NAME} \
 --embedding_model_name_or_path "Yukang/Llama-2-7b-longlora-32k-ft" \
 --tokenizer_name "meta-llama/Llama-2-7b-chat-hf" \
---data_files data/train/token_embedding/msmarco_hn_train.jsonl \
+--data_files data/train/token_level_estimator/msmarco_hn_train.jsonl \
 --lora_tune True \
 --learning_rate 2e-4 \
 --num_train_epochs 1 \
@@ -51,18 +51,18 @@ torchrun --nproc_per_node 8 -m main.train_token_embedding \
 
 ```bash
 OUTPUE_NAME=llama2-token-retrieval
-mkdir -p data/outputs/token_embedding/ft/${OUTPUE_NAME}
+mkdir -p data/outputs/token_level_estimator/ft/${OUTPUE_NAME}
 
-BASE="data/outputs/token_embedding/pretrain/llama2-pretrain-msmarco"
+BASE="data/outputs/token_level_estimator/pretrain/llama2-pretrain-msmarco"
 LATEST_CKPT_DIR=$(ls -d ${BASE}/checkpoint-* | sort -V | tail -n 1)
 PEFT_MODEL_PATH="${LATEST_CKPT_DIR}"
 
-torchrun --nproc_per_node 8 -m main.train_token_embedding \
---output_dir data/outputs/token_embedding/ft/${OUTPUE_NAME} \
+torchrun --nproc_per_node 8 -m main.train_token_level_estimator \
+--output_dir data/outputs/token_level_estimator/ft/${OUTPUE_NAME} \
 --embedding_model_name_or_path "Yukang/Llama-2-7b-longlora-32k-ft" \
 --peft_model_name_or_path "$PEFT_MODEL_PATH" \
 --tokenizer_name "meta-llama/Llama-2-7b-chat-hf" \
---data_files data/train/token_embedding/nq_llama2.json data/train/token_embedding/hotpotqa_llama2.json data/train/token_embedding/arc_challenge_llama2.json data/train/token_embedding/gov_report_llama2.json data/train/token_embedding/multi_news_llama2.json \
+--data_files data/train/token_level_estimator/nq_llama2.json data/train/token_level_estimator/hotpotqa_llama2.json data/train/token_level_estimator/arc_challenge_llama2.json data/train/token_level_estimator/gov_report_llama2.json data/train/token_level_estimator/multi_news_llama2.json \
 --lora_tune True \
 --learning_rate 2e-4 \
 --num_train_epochs 1 \
@@ -91,13 +91,13 @@ The base model is [Qwen/Qwen3-Embedding-8B](https://huggingface.co/Qwen/Qwen3-Em
 
 ```bash
 OUTPUE_NAME=qwen3-token-retrieval
-mkdir -p data/outputs/token_embedding/ft/${OUTPUE_NAME}
+mkdir -p data/outputs/token_level_estimator/ft/${OUTPUE_NAME}
 
-torchrun --nproc_per_node 8 -m main.train_token_embedding \
---output_dir data/outputs/token_embedding/ft/${OUTPUE_NAME} \
+torchrun --nproc_per_node 8 -m main.train_token_level_estimator \
+--output_dir data/outputs/token_level_estimator/ft/${OUTPUE_NAME} \
 --embedding_model_name_or_path "Qwen/Qwen3-Embedding-8B" \
 --tokenizer_name "Qwen/Qwen3-8B" \
---data_files data/train/token_embedding/nq_qwen3.json data/train/token_embedding/hotpotqa_qwen3.json  data/train/token_embedding/arc_challenge_qwen3.json data/train/token_embedding/gov_report_qwen3.json data/train/token_embedding/multi_news_qwen3.json \
+--data_files data/train/token_level_estimator/nq_qwen3.json data/train/token_level_estimator/hotpotqa_qwen3.json  data/train/token_level_estimator/arc_challenge_qwen3.json data/train/token_level_estimator/gov_report_qwen3.json data/train/token_level_estimator/multi_news_qwen3.json \
 --lora_tune True \
 --learning_rate 2e-4 \
 --num_train_epochs 1 \
