@@ -12,7 +12,7 @@
 
 ## 1. News
 
-* 2026-02-12：Released AceRAG codebase. Inference: [inference.md](https://github.com/VectorSpaceLab/LightRAG/blob/main/AceRAG/examples/inference.md) Evaluation: [evaluation.md](https://github.com/VectorSpaceLab/LightRAG/blob/main/AceRAG/examples/evaluation.md) Train: [training_compressive_encoder.md](https://github.com/VectorSpaceLab/LightRAG/blob/main/AceRAG/examples/training_compressive_encoder.md) and [training_token_embedding.md](https://github.com/VectorSpaceLab/LightRAG/blob/main/AceRAG/examples/training_token_embedding.md).
+* 2026-02-12：Released AceRAG codebase. Inference: [inference.md](https://github.com/VectorSpaceLab/LightRAG/blob/main/AceRAG/examples/inference.md) Evaluation: [evaluation.md](https://github.com/VectorSpaceLab/LightRAG/blob/main/AceRAG/examples/evaluation.md) Train: [training_context_compressor.md](https://github.com/VectorSpaceLab/LightRAG/blob/main/AceRAG/examples/training_context_compressor.md) and [training_token_level_estimator.md](https://github.com/VectorSpaceLab/LightRAG/blob/main/AceRAG/examples/training_token_level_estimator.md).
 
 * 2026-02-12: AceRAG training and evaluation datasets are available on Hugging Face: [AceRAG-Data](https://huggingface.co/datasets/wcyno23/AceRAG-Data).
 * 2026-02-03: ⚡Released task aware context compression model:  [AceRAG-Qwen3-8b](https://huggingface.co/wcyno23/AceRAG-Qwen3-8b) and [AceRAG-Llama2-7b](https://huggingface.co/wcyno23/AceRAG-Llama2-7b).

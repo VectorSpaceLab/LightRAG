@@ -33,4 +33,4 @@ See [evaluation section](./examples/evaluation.md).
 
 #### Training
 
-See [compressive encoder training section](./examples/training_compressive_encoder.md) and [token embedding training section](./examples/training_token_embedding.md).
+See [context compressor training section](./examples/training_context_compressor.md) and [token-level estimator training section](./examples/training_token_level_estimator.md).
