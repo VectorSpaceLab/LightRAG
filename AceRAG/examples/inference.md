@@ -1,6 +1,6 @@
 # Inference
 
-## TacZip-Llama2-7b
+## AceRAG-Llama2-7b
 
 ### Parameter Description
 
@@ -23,8 +23,8 @@ from transformers import AutoModel, AutoTokenizer
 CONTEXT_TAG = "[CONTEXT_RmehNsY1]"
 INPUT_TAG = "[INPUT_RmehNsY1]"
 
-tokenizer = AutoTokenizer.from_pretrained("wcyno23/TacZip-Llama2-7b", trust_remote_code=True)
-model = AutoModel.from_pretrained("wcyno23/TacZip-Llama2-7b", trust_remote_code=True)
+tokenizer = AutoTokenizer.from_pretrained("wcyno23/AceRAG-Llama2-7b", trust_remote_code=True)
+model = AutoModel.from_pretrained("wcyno23/AceRAG-Llama2-7b", trust_remote_code=True)
 model = model.to('cuda')
 
 qa_template = f"Answer the question based on the given passages. Only give me the answer and do not output any other words.\n\nThe following are given passages.\n{CONTEXT_TAG}\n\nAnswer the question based on the given passages. Only give me the answer and do not output any other words.\n\nQuestion: {INPUT_TAG}\nAnswer:"
@@ -55,7 +55,7 @@ During down-sampling, model performance can be further improved by leveraging co
 
 For example, tokens can be divided into two priority levels: high-priority tokens are assigned lower compression ratios, while low-priority tokens are assigned higher compression ratios. 
 
-Specifically, TacZip employs an embedding model trained for token-level retrieval to estimate token priorities. **Note:** this evaluation introduces additional computational overhead.
+Specifically, AceRAG employs an embedding model trained for token-level retrieval to estimate token priorities. **Note:** this evaluation introduces additional computational overhead.
 
 - `queries` (`list`): A list of questions to be used as input to the embedding model.
 
@@ -84,7 +84,7 @@ print(f"Question: {questions[0]}")
 print(f"Answers: {tokenizer.decode(outputs[0], skip_special_tokens=True)}")
 ```
 
-## TacZip-Qwen3-8b
+## AceRAG-Qwen3-8b
 
 ### Parameter Description
 
@@ -107,8 +107,8 @@ from transformers import AutoModel, AutoTokenizer
 CONTEXT_TAG = "[CONTEXT_RmehNsY1]"
 INPUT_TAG = "[INPUT_RmehNsY1]"
 
-tokenizer = AutoTokenizer.from_pretrained("wcyno23/TacZip-Qwen3-8b", trust_remote_code=True)
-model = AutoModel.from_pretrained("wcyno23/TacZip-Qwen3-8b", trust_remote_code=True)
+tokenizer = AutoTokenizer.from_pretrained("wcyno23/AceRAG-Qwen3-8b", trust_remote_code=True)
+model = AutoModel.from_pretrained("wcyno23/AceRAG-Qwen3-8b", trust_remote_code=True)
 model = model.to('cuda')
 
 qa_template = f"Answer the question based on the given passages. Only give me the answer and do not output any other words.\n\nThe following are given passages.\n{CONTEXT_TAG}\n\nAnswer the question based on the given passages. Only give me the answer and do not output any other words.\n\nQuestion: {INPUT_TAG}\nAnswer:"
@@ -139,7 +139,7 @@ During down-sampling, model performance can be further improved by leveraging co
 
 For example, tokens can be divided into two priority levels: high-priority tokens are assigned lower compression ratios, while low-priority tokens are assigned higher compression ratios. 
 
-Specifically, TacZip employs an embedding model trained for token-level retrieval to estimate token priorities. **Note:** this evaluation introduces additional computational overhead.
+Specifically, AceRAG employs an embedding model trained for token-level retrieval to estimate token priorities. **Note:** this evaluation introduces additional computational overhead.
 
 - `queries` (`list`): A list of questions to be used as input to the embedding model.
 

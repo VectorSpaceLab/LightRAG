@@ -9,14 +9,14 @@ The training process consists of two stages:
   - 10K samples from [LongAlpaca](https://huggingface.co/datasets/Yukang/LongAlpaca-12k)
   - 130K samples from HotpotQA, NQ, MulitNews, GovReport, TREC-fine, Banking7, ARC-easy and ARC-challenge.
 
-Please download the training data from [TacZip-Data]( https://huggingface.co/datasets/wcyno23/TacZip-Data/tree/main/train/compressive_encoder) and place it under the `data` directory.
+Please download the training data from [AceRAG-Data]( https://huggingface.co/datasets/wcyno23/AceRAG-Data/tree/main/train/compressive_encoder) and place it under the `data` directory.
 
 ## Llama2-7B
 
 ### Pretrain
 
 ```bash
-OUTPUE_NAME=taczip-llama2-pretrain
+OUTPUE_NAME=acerag-llama2-pretrain
 mkdir -p data/outputs/compressive_encoder/pretrain/${OUTPUE_NAME}
 
 torchrun --nproc_per_node 8 -m main.train_compressive_encoder \
@@ -43,10 +43,10 @@ torchrun --nproc_per_node 8 -m main.train_compressive_encoder \
 ### Finetune
 
 ```bash
-OUTPUE_NAME=taczip-llama2-longalpaca
+OUTPUE_NAME=acerag-llama2-longalpaca
 mkdir -p data/outputs/compressive_encoder/ft/${OUTPUE_NAME}
 
-BASE="data/outputs/compressive_encoder/pretrain/taczip-llama2-pretrain"
+BASE="data/outputs/compressive_encoder/pretrain/acerag-llama2-pretrain"
 LATEST_CKPT_DIR=$(ls -d ${BASE}/checkpoint-* | sort -V | tail -n 1)
 ENCODER_PATH="${LATEST_CKPT_DIR}/compressive_encoder"
 echo "Using encoder path: $ENCODER_PATH"
@@ -73,10 +73,10 @@ torchrun --nproc_per_node 8 -m main.train_compressive_encoder \
 ```
 
 ```bash
-OUTPUE_NAME=taczip-llama2-multitask-ft
+OUTPUE_NAME=acerag-llama2-multitask-ft
 mkdir -p data/outputs/compressive_encoder/ft/${OUTPUE_NAME}
 
-BASE="data/outputs/compressive_encoder/ft/taczip-llama2-longalpaca"
+BASE="data/outputs/compressive_encoder/ft/acerag-llama2-longalpaca"
 LATEST_CKPT_DIR=$(ls -d ${BASE}/checkpoint-* | sort -V | tail -n 1)
 ENCODER_PATH="${LATEST_CKPT_DIR}/compressive_encoder"
 echo "Using encoder path: $ENCODER_PATH"
@@ -109,7 +109,7 @@ torchrun --nproc_per_node 8 -m main.train_compressive_encoder \
 ### Pretrain
 
 ```bash
-OUTPUE_NAME=taczip-qwen3-pretrain
+OUTPUE_NAME=acerag-qwen3-pretrain
 mkdir -p data/outputs/compressive_encoder/${OUTPUE_NAME}
 
 torchrun --nproc_per_node 8 -m main.train_compressive_encoder \
@@ -138,10 +138,10 @@ torchrun --nproc_per_node 8 -m main.train_compressive_encoder \
 ### Finetune
 
 ```bash
-OUTPUE_NAME=taczip-qwen3-longalpaca
+OUTPUE_NAME=acerag-qwen3-longalpaca
 mkdir -p data/outputs/compressive_encoder/ft/${OUTPUE_NAME}
 
-BASE="data/outputs/compressive_encoder/pretrain/taczip-qwen3-pretrain"
+BASE="data/outputs/compressive_encoder/pretrain/acerag-qwen3-pretrain"
 LATEST_CKPT_DIR=$(ls -d ${BASE}/checkpoint-* | sort -V | tail -n 1)
 ENCODER_PATH="${LATEST_CKPT_DIR}/compressive_encoder"
 echo "Using encoder path: $ENCODER_PATH"
@@ -168,10 +168,10 @@ torchrun --nproc_per_node 8 -m main.train_compressive_encoder \
 ```
 
 ```bash
-OUTPUE_NAME=taczip-qwen3-multitask-ft
+OUTPUE_NAME=acerag-qwen3-multitask-ft
 mkdir -p data/outputs/compressive_encoder/ft/${OUTPUE_NAME}
 
-BASE="data/outputs/compressive_encoder/ft/taczip-qwen3-longalpaca"
+BASE="data/outputs/compressive_encoder/ft/acerag-qwen3-longalpaca"
 LATEST_CKPT_DIR=$(ls -d ${BASE}/checkpoint-* | sort -V | tail -n 1)
 ENCODER_PATH="${LATEST_CKPT_DIR}/compressive_encoder"
 echo "Using encoder path: $ENCODER_PATH"
