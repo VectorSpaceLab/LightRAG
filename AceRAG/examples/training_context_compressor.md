@@ -17,9 +17,9 @@ Please download the training data from [AceRAG-Data]( https://huggingface.co/dat
 
 ```bash
 OUTPUE_NAME=acerag-llama2-pretrain
-mkdir -p data/outputs/compressive_encoder/pretrain/${OUTPUE_NAME}
+mkdir -p data/outputs/context_compressor/pretrain/${OUTPUE_NAME}
 
-torchrun --nproc_per_node 8 -m main.train_compressive_encoder \
+torchrun --nproc_per_node 8 -m main.train_context_compressor \
 --language_model_name_or_path meta-llama/Llama-2-7b-chat-hf \
 --window_mode True \
 --min_length 1024 \
@@ -30,8 +30,8 @@ torchrun --nproc_per_node 8 -m main.train_compressive_encoder \
 --encoder_max_length 4096 \
 --comp_candidates 1 2 4 8 \
 --pretraining_down_scaling_method random \
---data_files data/train/compressive_encoder/redpajama.json \
---output_dir data/outputs/compressive_encoder/pretrain/${OUTPUE_NAME} \
+--data_files data/train/context_compressor/redpajama.json \
+--output_dir data/outputs/context_compressor/pretrain/${OUTPUE_NAME} \
 --save_strategy epoch \
 --deepspeed data/ds_config/ds_config_stage2.json \
 --gradient_checkpointing \
@@ -44,14 +44,14 @@ torchrun --nproc_per_node 8 -m main.train_compressive_encoder \
 
 ```bash
 OUTPUE_NAME=acerag-llama2-longalpaca
-mkdir -p data/outputs/compressive_encoder/ft/${OUTPUE_NAME}
+mkdir -p data/outputs/context_compressor/ft/${OUTPUE_NAME}
 
-BASE="data/outputs/compressive_encoder/pretrain/acerag-llama2-pretrain"
+BASE="data/outputs/context_compressor/pretrain/acerag-llama2-pretrain"
 LATEST_CKPT_DIR=$(ls -d ${BASE}/checkpoint-* | sort -V | tail -n 1)
-ENCODER_PATH="${LATEST_CKPT_DIR}/compressive_encoder"
+ENCODER_PATH="${LATEST_CKPT_DIR}/context_compressor"
 echo "Using encoder path: $ENCODER_PATH"
 
-torchrun --nproc_per_node 8 -m main.train_compressive_encoder \
+torchrun --nproc_per_node 8 -m main.train_context_compressor \
 --language_model_name_or_path meta-llama/Llama-2-7b-chat-hf \
 --window_mode false \
 --lm_max_length 4096 \
@@ -59,12 +59,12 @@ torchrun --nproc_per_node 8 -m main.train_compressive_encoder \
 --encoder_num_hidden_layers 8 \
 --encoder_max_length 4096 \
 --comp_candidates 1 2 4 8 \
---data_files data/train/compressive_encoder/longalpaca.json \
+--data_files data/train/context_compressor/longalpaca.json \
 --min_length 1024 \
 --max_length 32000 \
 --learning_rate 1e-5 \
 --down_scaling_method random \
---output_dir data/outputs/compressive_encoder/ft/${OUTPUE_NAME} \
+--output_dir data/outputs/context_compressor/ft/${OUTPUE_NAME} \
 --save_strategy epoch \
 --deepspeed data/ds_config/ds_config_stage2.json \
 --stage ft \
@@ -74,14 +74,14 @@ torchrun --nproc_per_node 8 -m main.train_compressive_encoder \
 
 ```bash
 OUTPUE_NAME=acerag-llama2-multitask-ft
-mkdir -p data/outputs/compressive_encoder/ft/${OUTPUE_NAME}
+mkdir -p data/outputs/context_compressor/ft/${OUTPUE_NAME}
 
-BASE="data/outputs/compressive_encoder/ft/acerag-llama2-longalpaca"
+BASE="data/outputs/context_compressor/ft/acerag-llama2-longalpaca"
 LATEST_CKPT_DIR=$(ls -d ${BASE}/checkpoint-* | sort -V | tail -n 1)
-ENCODER_PATH="${LATEST_CKPT_DIR}/compressive_encoder"
+ENCODER_PATH="${LATEST_CKPT_DIR}/context_compressor"
 echo "Using encoder path: $ENCODER_PATH"
 
-torchrun --nproc_per_node 8 -m main.train_compressive_encoder \
+torchrun --nproc_per_node 8 -m main.train_context_compressor \
 --language_model_name_or_path meta-llama/Llama-2-7b-chat-hf \
 --window_mode false \
 --lm_max_length 4096 \
@@ -89,12 +89,12 @@ torchrun --nproc_per_node 8 -m main.train_compressive_encoder \
 --encoder_num_hidden_layers 8 \
 --encoder_max_length 4096 \
 --comp_candidates 1 2 4 8 \
---data_files data/train/compressive_encoder/hotpotqa.json data/train/compressive_encoder/nq.json data/train/compressive_encoder/multi_news.json data/train/compressive_encoder/gov_report.json data/train/compressive_encoder/trec_fine.json data/train/compressive_encoder/banking77.json data/train/compressive_encoder/arc_easy.json data/train/compressive_encoder/arc_challenge.json \
+--data_files data/train/context_compressor/hotpotqa.json data/train/context_compressor/nq.json data/train/context_compressor/multi_news.json data/train/context_compressor/gov_report.json data/train/context_compressor/trec_fine.json data/train/context_compressor/banking77.json data/train/context_compressor/arc_easy.json data/train/context_compressor/arc_challenge.json \
 --min_length 1024 \
 --max_length 32000 \
 --learning_rate 1e-5 \
 --down_scaling_method random \
---output_dir data/outputs/compressive_encoder/ft/${OUTPUE_NAME} \
+--output_dir data/outputs/context_compressor/ft/${OUTPUE_NAME} \
 --data_splits 0.1 0.1 1.0 1.0 0.1 0.1 0.1 0.1 \
 --save_strategy epoch \
 --train_num_per_data 50000 \
@@ -110,9 +110,9 @@ torchrun --nproc_per_node 8 -m main.train_compressive_encoder \
 
 ```bash
 OUTPUE_NAME=acerag-qwen3-pretrain
-mkdir -p data/outputs/compressive_encoder/${OUTPUE_NAME}
+mkdir -p data/outputs/context_compressor/${OUTPUE_NAME}
 
-torchrun --nproc_per_node 8 -m main.train_compressive_encoder \
+torchrun --nproc_per_node 8 -m main.train_context_compressor \
 --language_model_name_or_path Qwen/Qwen3-8B \
 --window_mode True \
 --min_length 1024 \
@@ -123,8 +123,8 @@ torchrun --nproc_per_node 8 -m main.train_compressive_encoder \
 --encoder_max_length 4096 \
 --comp_candidates 1 2 4 8 \
 --pretraining_down_scaling_method random \
---data_files data/train/compressive_encoder/redpajama.json \
---output_dir data/outputs/compressive_encoder/pretrain/${OUTPUE_NAME} \
+--data_files data/train/context_compressor/redpajama.json \
+--output_dir data/outputs/context_compressor/pretrain/${OUTPUE_NAME} \
 --save_strategy steps \
 --save_steps 0.249999 \
 --deepspeed data/ds_config/ds_config_stage2.json \
@@ -139,14 +139,14 @@ torchrun --nproc_per_node 8 -m main.train_compressive_encoder \
 
 ```bash
 OUTPUE_NAME=acerag-qwen3-longalpaca
-mkdir -p data/outputs/compressive_encoder/ft/${OUTPUE_NAME}
+mkdir -p data/outputs/context_compressor/ft/${OUTPUE_NAME}
 
-BASE="data/outputs/compressive_encoder/pretrain/acerag-qwen3-pretrain"
+BASE="data/outputs/context_compressor/pretrain/acerag-qwen3-pretrain"
 LATEST_CKPT_DIR=$(ls -d ${BASE}/checkpoint-* | sort -V | tail -n 1)
-ENCODER_PATH="${LATEST_CKPT_DIR}/compressive_encoder"
+ENCODER_PATH="${LATEST_CKPT_DIR}/context_compressor"
 echo "Using encoder path: $ENCODER_PATH"
 
-torchrun --nproc_per_node 8 -m main.train_compressive_encoder \
+torchrun --nproc_per_node 8 -m main.train_context_compressor \
 --language_model_name_or_path Qwen/Qwen3-8B \
 --window_mode false \
 --lm_max_length 4096 \
@@ -154,12 +154,12 @@ torchrun --nproc_per_node 8 -m main.train_compressive_encoder \
 --encoder_num_hidden_layers 8 \
 --encoder_max_length 4096 \
 --comp_candidates 1 2 4 8 \
---data_files data/train/compressive_encoder/longalpaca.json \
+--data_files data/train/context_compressor/longalpaca.json \
 --min_length 1024 \
 --max_length 32000 \
 --learning_rate 1e-5 \
 --down_scaling_method random \
---output_dir data/outputs/compressive_encoder/ft/${OUTPUE_NAME} \
+--output_dir data/outputs/context_compressor/ft/${OUTPUE_NAME} \
 --save_strategy epoch \
 --deepspeed data/ds_config/ds_config_stage2.json \
 --stage ft \
@@ -169,14 +169,14 @@ torchrun --nproc_per_node 8 -m main.train_compressive_encoder \
 
 ```bash
 OUTPUE_NAME=acerag-qwen3-multitask-ft
-mkdir -p data/outputs/compressive_encoder/ft/${OUTPUE_NAME}
+mkdir -p data/outputs/context_compressor/ft/${OUTPUE_NAME}
 
-BASE="data/outputs/compressive_encoder/ft/acerag-qwen3-longalpaca"
+BASE="data/outputs/context_compressor/ft/acerag-qwen3-longalpaca"
 LATEST_CKPT_DIR=$(ls -d ${BASE}/checkpoint-* | sort -V | tail -n 1)
-ENCODER_PATH="${LATEST_CKPT_DIR}/compressive_encoder"
+ENCODER_PATH="${LATEST_CKPT_DIR}/context_compressor"
 echo "Using encoder path: $ENCODER_PATH"
 
-torchrun --nproc_per_node 8 -m main.train_compressive_encoder \
+torchrun --nproc_per_node 8 -m main.train_context_compressor \
 --language_model_name_or_path Qwen/Qwen3-8B \
 --window_mode false \
 --lm_max_length 4096 \
@@ -184,12 +184,12 @@ torchrun --nproc_per_node 8 -m main.train_compressive_encoder \
 --encoder_num_hidden_layers 8 \
 --encoder_max_length 4096 \
 --comp_candidates 1 2 4 8 \
---data_files data/train/compressive_encoder/hotpotqa.json data/train/compressive_encoder/nq.json data/train/compressive_encoder/multi_news.json data/train/compressive_encoder/gov_report.json data/train/compressive_encoder/trec_fine.json data/train/compressive_encoder/banking77.json data/train/compressive_encoder/arc_easy.json data/train/compressive_encoder/arc_challenge.json \
+--data_files data/train/context_compressor/hotpotqa.json data/train/context_compressor/nq.json data/train/context_compressor/multi_news.json data/train/context_compressor/gov_report.json data/train/context_compressor/trec_fine.json data/train/context_compressor/banking77.json data/train/context_compressor/arc_easy.json data/train/context_compressor/arc_challenge.json \
 --min_length 1024 \
 --max_length 32000 \
 --learning_rate 1e-5 \
 --down_scaling_method random \
---output_dir data/outputs/compressive_encoder/ft/${OUTPUE_NAME} \
+--output_dir data/outputs/context_compressor/ft/${OUTPUE_NAME} \
 --data_splits 0.1 0.1 1.0 1.0 0.1 0.1 0.1 0.1 \
 --save_strategy epoch \
 --train_num_per_data 50000 \

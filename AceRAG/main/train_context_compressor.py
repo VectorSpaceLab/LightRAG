@@ -7,7 +7,7 @@ from transformers import HfArgumentParser, set_seed
 from src import load_model_and_tokenizer
 from src.args import ModelArgs, TrainingArgs
 from src.data import Data, DefaultDataCollator, SFTDataCollator, INPUT_TAG, CONTEXT_TAG
-from src.trainer import CompressiveEncoderTrainer
+from src.trainer import ContextCompressorTrainer
 from src.utils import extract_file_name
 from src.config import dataset2compression_instruction
 
@@ -202,7 +202,7 @@ def main():
     else:
         collator = SFTDataCollator(tokenizer)
 
-    trainer = CompressiveEncoderTrainer(
+    trainer = ContextCompressorTrainer(
         model=model,
         args=training_args,
         train_dataset=dataset,

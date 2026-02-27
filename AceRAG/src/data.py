@@ -240,7 +240,7 @@ class SFTDataCollator:
             input_ids, ph_indices, labels
         )
 
-        # * process compressive encoder input
+        # * process context compressor input
         encoder_input_ids, encoder_attention_mask, encoder_indices = self.process_encoder_inputs(
             encoder_input_ids, encoder_indices
         )
@@ -326,7 +326,7 @@ class SFTDataCollator:
 
 
 # alignment between without selective compression and with selective compression
-def get_compressive_encoder_inputs(
+def get_context_compressor_inputs(
     conversations: list,
     tokenizer: PreTrainedTokenizer,
     lm_max_length: int,
@@ -475,7 +475,7 @@ class TokenLevelEmbedCollator(DataCollatorWithPadding):
             return_tensors="pt",
         )
 
-        input_ids, attention_mask = get_compressive_encoder_inputs(
+        input_ids, attention_mask = get_context_compressor_inputs(
             conversations,
             self.tokenizer,
             lm_max_length=4096,

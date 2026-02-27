@@ -21,7 +21,7 @@ class ModelArgs:
     lm_max_length: int = field(
         default=4096,
     )
-    # * compressive encoder
+    # * context compressor
     encoder_name_or_path: str = field(
         default=None,
     )

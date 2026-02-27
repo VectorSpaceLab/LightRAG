@@ -237,7 +237,7 @@ class BiEncoderModel(nn.Module):
         self.model.save_pretrained(output_dir, state_dict=state_dict, **kwargs)
 
 
-class CompressiveEncoder(nn.Module):
+class ContextCompressor(nn.Module):
     def __init__(
         self,
         model_name_or_path: str = "meta-llama/Llama-2-7b-chat-hf",
@@ -274,7 +274,7 @@ class CompressiveEncoder(nn.Module):
 
     def save(self, output_dir):
         self.model.save_pretrained(
-            os.path.join(output_dir, "compressive_encoder"), safe_serialization=True
+            os.path.join(output_dir, "context_compressor"), safe_serialization=True
         )
 
     def forward(self, input_ids, attention_mask, encoder_indices: List[List[int]]):
@@ -323,7 +323,7 @@ class CompressiveEncoder(nn.Module):
 
         comp_segment_sizes.pop()  # The last segment can be deleted directly (no compression needed)
 
-        # * prepare compressive encoder segment sizes and indices
+        # * prepare context compressor segment sizes and indices
         encoder_indices = []
         _encoder_indices = []
         encoder_segement_sizes = []
@@ -353,7 +353,7 @@ class CompressiveEncoder(nn.Module):
 
             encoder_segement_size += segment_sizes[i]
 
-        # * format compressive encoder inputs
+        # * format context compressor inputs
         encoder_input_ids = input_ids[:, : sum(encoder_segement_sizes)].split(
             encoder_segement_sizes, dim=1
         )
@@ -361,7 +361,7 @@ class CompressiveEncoder(nn.Module):
             encoder_segement_sizes, dim=1
         )
 
-        # * get compressive encoder embeds
+        # * get context compressor embeds
         encoder_embeds = []
         for i in range(len(encoder_input_ids)):
             _encoder_embeds = self.forward(
@@ -381,7 +381,7 @@ class CompressiveEncoder(nn.Module):
         return self.idx >= len(self.input_ids_segments)
 
     def step(self):
-        # * compressive encoder embeds
+        # * context compressor embeds
         encoder_embeds = torch.cat(self.encoder_embeds_segments[: self.idx])  # [SUM(ENCODER_LEN), H]
         # * placeholder indices
         ph_indices = [[i for i in range(encoder_embeds.shape[0])]]
@@ -706,7 +706,7 @@ class CompressionRateAdapter(nn.Module):
             input_ids, ph_indices, labels, tokenizer
         )
 
-        # * process compressive encoder input
+        # * process context compressor input
         encoder_input_ids, encoder_attention_mask, encoder_indices = self.process_encoder_inputs(
             encoder_input_ids, encoder_indices, tokenizer
         )
@@ -926,7 +926,7 @@ class CompressionRateAdapter(nn.Module):
             input_ids, ph_indices, labels, tokenizer
         )
 
-        # * process compressive encoder input
+        # * process context compressor input
         encoder_input_ids, encoder_attention_mask, encoder_indices = self.process_encoder_inputs(
             encoder_input_ids, encoder_indices, tokenizer
         )
@@ -968,7 +968,7 @@ class AceRAGConfig(PretrainedConfig):
     ):
         super().__init__(**kwargs)
         self.language_model_name_or_path = language_model_name_or_path # language model name
-        self.encoder_name_or_path = encoder_name_or_path # compressive encoder model name
+        self.encoder_name_or_path = encoder_name_or_path # context compressor model name
         self.embedding_model_name_or_path = embedding_model_name_or_path # embedding model name
         self.num_hidden_layers = num_hidden_layers # the number of encoder layers
         
@@ -983,7 +983,7 @@ class AceRAG(PreTrainedModel):
         window_mode: bool = False, # enable two stream auto regressive training
         window: int = 1024, # window size when perfroming two stream auto regressive training
         lm_max_length: int = 4096, # maximum token length for language model inputs
-        encoder_max_length: int = 4096, # maxinum token length for compressive encoder inputs
+        encoder_max_length: int = 4096, # maxinum token length for context compressor inputs
         comp_candidates: Optional[List[int]] = None, # compression ratio candidates for training
         pretraining_down_scaling_method: str = "stride", # down scaling method used during pretraing
         embedding_peft_model_name_or_path: Optional[str] = None, # PEFT fine-tuned text embedding model path
@@ -1008,8 +1008,8 @@ class AceRAG(PreTrainedModel):
         )
 
         if config.encoder_name_or_path:
-            # * set compressive encoder
-            self.compressive_encoder = CompressiveEncoder(
+            # * set context compressor
+            self.context_compressor = ContextCompressor(
                 config.encoder_name_or_path, 
                 config.num_hidden_layers, 
                 dtype, 
@@ -1023,7 +1023,7 @@ class AceRAG(PreTrainedModel):
                 use_safetensors=use_safetensors,
             )
         else:
-            self.compressive_encoder = None
+            self.context_compressor = None
 
         # * set compression-rate adapter
         self.compression_rate_adapter = CompressionRateAdapter(
@@ -1051,8 +1051,8 @@ class AceRAG(PreTrainedModel):
             else:
                 device = torch.device("cpu")
             self.language_model.to(device)
-            if self.compressive_encoder:
-                self.compressive_encoder.to(device)
+            if self.context_compressor:
+                self.context_compressor.to(device)
         
             if self.compression_rate_adapter.embedding_model:
                 self.compression_rate_adapter.embedding_model.to(device)
@@ -1066,28 +1066,28 @@ class AceRAG(PreTrainedModel):
 
     def gradient_checkpointing_enable(self, gradient_checkpointing_kwargs=None):
         self.language_model.gradient_checkpointing_enable(gradient_checkpointing_kwargs)
-        self.compressive_encoder.gradient_checkpointing_enable(
+        self.context_compressor.gradient_checkpointing_enable(
             gradient_checkpointing_kwargs
         )
 
     def save(self, output_dir):
-        self.compressive_encoder.save(output_dir)
+        self.context_compressor.save(output_dir)
 
     def _two_stream_ar_forward(self, input_ids, attention_mask, labels):
-        self.compressive_encoder.clear_cache()
-        self.compressive_encoder.prepare(
+        self.context_compressor.clear_cache()
+        self.context_compressor.prepare(
             input_ids=input_ids,
             attention_mask=attention_mask,
             labels=labels,
         )
-        while not self.compressive_encoder.is_finished:
+        while not self.context_compressor.is_finished:
             (
                 input_ids,
                 attention_mask,
                 labels,
                 encoder_embeds,
                 ph_indices,
-            ) = self.compressive_encoder.step()
+            ) = self.context_compressor.step()
             inputs_embeds = self.prepare_inputs_embeds(input_ids, encoder_embeds, ph_indices)
             outputs = self.language_model(
                 inputs_embeds=inputs_embeds,
@@ -1095,11 +1095,11 @@ class AceRAG(PreTrainedModel):
                 labels=labels,
             )
             valid_token_num = (labels[:, 1:] != -100).sum()
-            self.compressive_encoder.update_loss(outputs.loss, valid_token_num)
+            self.context_compressor.update_loss(outputs.loss, valid_token_num)
 
-        window_loss = self.compressive_encoder.window_loss
-        window_valid_token_num = self.compressive_encoder.window_valid_token_num
-        sample_loss = self.compressive_encoder.sample_loss
+        window_loss = self.context_compressor.window_loss
+        window_valid_token_num = self.context_compressor.window_valid_token_num
+        sample_loss = self.context_compressor.sample_loss
 
         return CausalLMOutputForWindow(
             loss=sample_loss,
@@ -1117,7 +1117,7 @@ class AceRAG(PreTrainedModel):
         encoder_indices: Optional[List[List[int]]] = None,
         ph_indices: Optional[List[List[int]]] = None,
     ):
-        if self.compressive_encoder:
+        if self.context_compressor:
             if self.window_mode:
                 return self._two_stream_ar_forward(input_ids, attention_mask, labels)
             else:
@@ -1155,7 +1155,7 @@ class AceRAG(PreTrainedModel):
         for idx, _encoder_indices in enumerate(encoder_indices):
             if not _encoder_indices:
                 continue
-            _encoder_embeds = self.compressive_encoder(
+            _encoder_embeds = self.context_compressor(
                 encoder_input_ids[[idx]], encoder_attention_mask[[idx]], [_encoder_indices]
             )  # [ENCODER_LEN, H]
             encoder_embeds.append(_encoder_embeds)
@@ -1187,7 +1187,7 @@ class AceRAG(PreTrainedModel):
     ):
         self.eval()
 
-        if self.compressive_encoder:
+        if self.context_compressor:
             if ph_indices and encoder_indices:
                 encoder_embeds = self.get_encoder_embeds(
                     encoder_input_ids, encoder_attention_mask, encoder_indices

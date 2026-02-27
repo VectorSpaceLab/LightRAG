@@ -4,7 +4,7 @@ from typing import Optional
 from transformers.trainer import *
 
 
-class CompressiveEncoderTrainer(Trainer):
+class ContextCompressorTrainer(Trainer):
     def _save(self, output_dir: Optional[str] = None, state_dict=None):
         output_dir = output_dir if output_dir is not None else self.args.output_dir
         os.makedirs(output_dir, exist_ok=True)
